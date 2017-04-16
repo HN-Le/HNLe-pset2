@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,14 +16,14 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="38dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/editText"
         app:layout_constraintHorizontal_bias="0.171"
-        android:layout_below="@+id/word_counter"
-        android:layout_alignEnd="@+id/word_counter" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/Intro2"
+        android:layout_marginStart="40dp" />
 
     <TextView
         android:id="@+id/Intro2"
@@ -41,7 +42,10 @@
         android:id="@+id/word_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="word(s) left"
+        android:text= "ERROR"
+        android:layout_above="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="183dp"
@@ -57,9 +61,7 @@
         tools:layout_editor_absoluteY="267dp"
         android:layout_marginRight="31dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="32dp"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignParentEnd="true"
-        android:onClick="use_clicked"/>
+        android:layout_marginBottom="94dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
