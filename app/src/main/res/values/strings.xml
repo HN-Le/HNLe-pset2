@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MadLibs</string>
+    <string name="intro_text">Welcome to Mad Libs! Please fill in some text! </string>
+</resources>
