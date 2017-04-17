@@ -19,7 +19,7 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/editText"
+        android:id="@+id/user_input"
         app:layout_constraintHorizontal_bias="0.171"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/Intro2"
@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/word_counter"
+        android:id="@+id/layout_word_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text= "ERROR"
@@ -63,5 +63,16 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="94dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="use_clicked"/>
+
+    <Button
+        android:id="@+id/story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/use"
+        android:layout_marginBottom="16dp"
+        android:text="SEE STORY"
+        android:onClick="goToSecond"/>
 </RelativeLayout>
