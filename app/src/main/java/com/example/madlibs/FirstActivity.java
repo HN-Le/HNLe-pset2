@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import static com.example.madlibs.R.id.word_counter;
@@ -40,7 +42,7 @@ public class FirstActivity extends AppCompatActivity {
 
         try
         {
-            InputStream inputStream = assetManager.open("madlib0_simple.txt");
+            InputStream inputStream = assetManager.open("madlib1_tarzan.txt");
             Scanner scanner = new Scanner(inputStream);
             String output = "";
 
@@ -48,10 +50,12 @@ public class FirstActivity extends AppCompatActivity {
                 output += scanner.nextLine() + '\n';
             }
 
-            Story text_new = new Story(inputStream);
+            InputStream stream = new ByteArrayInputStream(output.getBytes(StandardCharsets.UTF_8));
+
+            Story text_new = new Story(stream);
             text_new.getPlaceholderCount();
 
-            textView.setText(output);
+            textView.setText((String.valueOf(text_new.getPlaceholderCount())) + " words left");
         }
 
         catch (Exception e)
