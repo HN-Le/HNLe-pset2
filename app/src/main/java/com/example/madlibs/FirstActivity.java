@@ -31,7 +31,12 @@ import static com.example.madlibs.R.id.word_counter;
 public class FirstActivity extends AppCompatActivity {
 
     private Context context = this;
-    private TextView textView;
+    private Story story;
+
+    TextView textView;
+    String input;
+    String text_done;
+    int placeholder_counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,23 +63,22 @@ public class FirstActivity extends AppCompatActivity {
             InputStream stream = new ByteArrayInputStream(output.getBytes(StandardCharsets.UTF_8));
 
             //  Make a new story object and load in the stream (the converted text file)
-            Story text_new = new Story(stream);
+            story = new Story(stream);
 
             //  Extract the placeholder amount from the text file through the story class
-            int placeholder_counter = text_new.getPlaceholderCount();
+            placeholder_counter = story.getPlaceholderCount();
 
             //  Set the hint of the editText to noun/verb/whatever
-            ((TextView) findViewById(R.id.user_input)).setHint(text_new.getNextPlaceholder());
+            ((TextView) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
 
             //  The amount of words left counter
             textView.setText((String.valueOf(placeholder_counter) + " words left"));
 
             //  Save input from EditText into a string
-            EditText user_input = (EditText) findViewById(R.id.user_input);
-            String input = user_input.getText().toString();
+//            EditText user_input = (EditText) findViewById(R.id.user_input);
+//            String input = user_input.getText().toString();
 
-            //  Fill in the placeholder in the text with the input from user
-            text_new.fillInPlaceholder(input);
+            Log.d("THIS", input);
 
         }
 
@@ -87,17 +91,32 @@ public class FirstActivity extends AppCompatActivity {
     //  When "USE" button is clicked
     public void use_clicked(View view) {
 
-        //  Save input from EditText into a string
-        EditText user_input = (EditText) findViewById(R.id.user_input);
-        String input = user_input.getText().toString();
-        Log.d("THIS", input);
+
+        if (!story.isFilledIn()) {
+            //  Save input from EditText into a string
+            EditText user_input = (EditText) findViewById(R.id.user_input);
+            String input = user_input.getText().toString();
+            story.fillInPlaceholder(input);
+
+            ((EditText) findViewById(R.id.user_input)).setText("");
+
+            ((EditText) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
+
+            textView.setText("");
+
+            placeholder_counter = story.getPlaceholderRemainingCount();
+
+            textView.setText((String.valueOf(placeholder_counter) + " words left"));
+
+
+
+        }
+        else {
+            Intent intent = new Intent(this, SecondActivity.class);
+            startActivity(intent);
+        }
 
     }
 
-    //  When "STORY" is clicked
-    public void goToSecond(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
-    }
 }
 
