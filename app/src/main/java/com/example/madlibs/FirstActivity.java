@@ -24,9 +24,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import static com.example.madlibs.R.id.editText;
-import static com.example.madlibs.R.id.story;
-import static com.example.madlibs.R.id.word_counter;
 
 
 public class FirstActivity extends AppCompatActivity {
@@ -119,7 +116,7 @@ public class FirstActivity extends AppCompatActivity {
 
             }
 
-            else {
+            if (story.isFilledIn()) {
 
                 String text_done = story.toString();
 

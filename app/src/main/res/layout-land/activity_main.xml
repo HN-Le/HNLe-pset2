@@ -23,10 +23,10 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:inputType="textMultiLine"
-        android:text="Welcome to Mad Libs! Please fill in some text! dgjsdkflgjkdfslgggggggggggggggdfgks;ld"
+        android:text="Welcome to Mad Libs! Please fill in some text!"
+        android:layout_marginBottom="45dp"
         android:layout_above="@+id/button"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="56dp" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/button"

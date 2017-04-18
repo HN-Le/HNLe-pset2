@@ -18,7 +18,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
-        android:layout_below="@+id/txt"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -31,7 +30,8 @@
         tools:layout_editor_absoluteY="431dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="52dp" />
+        android:layout_marginBottom="52dp"
+        android:onClick="startOver"/>
 
 
 

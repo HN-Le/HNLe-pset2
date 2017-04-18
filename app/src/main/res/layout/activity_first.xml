@@ -70,18 +70,9 @@
         tools:layout_editor_absoluteY="267dp"
         android:layout_marginRight="31dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="19dp"
         android:onClick="use_clicked"
-        android:layout_above="@+id/story"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/user_input"
+        android:layout_marginStart="18dp" />
 
-    <Button
-        android:id="@+id/story"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="41dp"
-        android:text="SEE STORY"
-        android:onClick="goToSecond"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/use" />
 </RelativeLayout>

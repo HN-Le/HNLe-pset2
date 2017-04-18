@@ -18,11 +18,11 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/editText"
+        android:id="@+id/user_input"
         app:layout_constraintHorizontal_bias="0.342"
-        android:layout_below="@+id/word_counter"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/layout_word_counter"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/Intro2"
@@ -38,10 +38,22 @@
         android:layout_marginTop="27dp" />
 
     <TextView
-        android:id="@+id/word_counter"
+        android:id="@+id/reminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="word(s) left"
+        android:text= "Please fill in"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="183dp"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/user_input"
+        android:layout_alignStart="@+id/user_input" />
+
+    <TextView
+        android:id="@+id/layout_word_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="154dp"
@@ -56,7 +68,8 @@
         tools:layout_editor_absoluteY="211dp"
         android:layout_marginRight="138dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_alignTop="@+id/editText"
+        android:layout_marginStart="31dp"
+        android:layout_alignBottom="@+id/user_input"
         android:layout_toEndOf="@+id/Intro2"
-        android:layout_marginStart="27dp" />
+        android:onClick="use_clicked"/>
 </RelativeLayout>
