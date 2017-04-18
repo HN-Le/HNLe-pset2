@@ -1,6 +1,7 @@
 package com.example.madlibs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,13 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        Intent intent = getIntent();
+        String text_final = intent.getStringExtra("text");
+
+        TextView final_verhaal = (TextView) findViewById(R.id.verhaal);
+        final_verhaal.setText(text_final);
+
     }
+
 
 }

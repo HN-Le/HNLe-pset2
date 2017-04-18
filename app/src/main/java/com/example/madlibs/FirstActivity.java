@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import static com.example.madlibs.R.id.editText;
+import static com.example.madlibs.R.id.story;
 import static com.example.madlibs.R.id.word_counter;
 
 
@@ -34,9 +35,12 @@ public class FirstActivity extends AppCompatActivity {
     private Story story;
 
     TextView textView;
+    TextView text_reminder;
     String input;
     String text_done;
     int placeholder_counter;
+    String reminder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
         textView = (TextView) findViewById(R.id.layout_word_counter);
+        text_reminder = (TextView) findViewById(R.id.reminder);
 
         AssetManager assetManager = context.getAssets();
 
@@ -71,14 +76,11 @@ public class FirstActivity extends AppCompatActivity {
             //  Set the hint of the editText to noun/verb/whatever
             ((TextView) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
 
+            // Set reminder to what to fill in
+            text_reminder.setText(("Please fill in a " + story.getNextPlaceholder()));
+
             //  The amount of words left counter
             textView.setText((String.valueOf(placeholder_counter) + " words left"));
-
-            //  Save input from EditText into a string
-//            EditText user_input = (EditText) findViewById(R.id.user_input);
-//            String input = user_input.getText().toString();
-
-            Log.d("THIS", input);
 
         }
 
@@ -91,29 +93,48 @@ public class FirstActivity extends AppCompatActivity {
     //  When "USE" button is clicked
     public void use_clicked(View view) {
 
-
-        if (!story.isFilledIn()) {
-            //  Save input from EditText into a string
-            EditText user_input = (EditText) findViewById(R.id.user_input);
-            String input = user_input.getText().toString();
-            story.fillInPlaceholder(input);
-
-            ((EditText) findViewById(R.id.user_input)).setText("");
-
-            ((EditText) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
-
-            textView.setText("");
-
-            placeholder_counter = story.getPlaceholderRemainingCount();
-
-            textView.setText((String.valueOf(placeholder_counter) + " words left"));
+        EditText user_input = (EditText) findViewById(R.id.user_input);
+        input = user_input.getText().toString();
 
 
+        if (!input.matches("")) {
 
+            if (!story.isFilledIn()) {
+                //  Save input from EditText into a string
+
+                story.fillInPlaceholder(input);
+
+                ((EditText) findViewById(R.id.user_input)).setText("");
+
+                ((EditText) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
+
+                textView.setText("");
+
+                placeholder_counter = story.getPlaceholderRemainingCount();
+
+                textView.setText((String.valueOf(placeholder_counter) + " words left"));
+
+                // Set reminder to what to fill in
+                text_reminder.setText(("Please fill in a " + story.getNextPlaceholder()));
+
+            }
+
+            else {
+
+                String text_done = story.toString();
+
+                Intent intent = new Intent(this, SecondActivity.class);
+
+                intent.putExtra("text", text_done);
+
+                startActivity(intent);
+                finish();
+            }
         }
+
         else {
-            Intent intent = new Intent(this, SecondActivity.class);
-            startActivity(intent);
+            // Set reminder to what to fill in
+            text_reminder.setText(("Please fill in a " + story.getNextPlaceholder()));
         }
 
     }
