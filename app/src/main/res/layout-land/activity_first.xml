@@ -10,7 +10,7 @@
         android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="works"
+        android:hint="ERROR"
         android:inputType="textPersonName"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"

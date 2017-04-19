@@ -6,21 +6,11 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -29,14 +19,16 @@ import java.util.Scanner;
 public class FirstActivity extends AppCompatActivity {
 
     private Context context = this;
-    private Story story;
 
+    Story story;
     TextView textView;
     TextView text_reminder;
+    TextView user_input;
     String input;
     String text_done;
     int placeholder_counter;
-    String reminder;
+    String holder;
+    InputStream inputStream;
 
 
     @Override
@@ -46,46 +38,57 @@ public class FirstActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.layout_word_counter);
         text_reminder = (TextView) findViewById(R.id.reminder);
+        user_input = (TextView) findViewById(R.id.user_input);
 
-        AssetManager assetManager = context.getAssets();
 
-        try {
-            //  Open text file and load it into scanner
-            InputStream inputStream = assetManager.open("madlib1_tarzan.txt");
-            Scanner scanner = new Scanner(inputStream);
-
-            String output = "";
-
-            //  Go over every line and save it into the string "output"
-            while (scanner.hasNextLine()) {
-                output += scanner.nextLine() + '\n';
-            }
-
-            //  Convert string to stream
-            InputStream stream = new ByteArrayInputStream(output.getBytes(StandardCharsets.UTF_8));
-
-            //  Make a new story object and load in the stream (the converted text file)
-            story = new Story(stream);
-
-            //  Extract the placeholder amount from the text file through the story class
-            placeholder_counter = story.getPlaceholderCount();
-
-            //  Set the hint of the editText to noun/verb/whatever
-            ((TextView) findViewById(R.id.user_input)).setHint(story.getNextPlaceholder());
-
-            // Set reminder to what to fill in
-            text_reminder.setText(("Please fill in a " + story.getNextPlaceholder()));
-
-            //  The amount of words left counter
+        if(savedInstanceState != null){
+            story = (Story) savedInstanceState.getSerializable("story");
             textView.setText((String.valueOf(placeholder_counter) + " words left"));
+            placeholder_counter = savedInstanceState.getInt("counter");
+            textView.setText(placeholder_counter + " words left");
+            text_reminder.setText(("Please fill in a " + story.getNextPlaceholder()));
+            user_input.setHint(story.getNextPlaceholder());
 
         }
 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        else {
 
+            try {
+
+                inputStream = getAssets().open("madlib0_simple.txt");
+
+                //  Make a new story object and load in the stream (the converted text file)
+                story = new Story(inputStream);
+
+                //  Extract the placeholder amount from the text file through the story class
+                placeholder_counter = story.getPlaceholderRemainingCount();
+
+                user_input = (TextView) findViewById(R.id.user_input);
+
+                holder = story.getNextPlaceholder();
+
+                //  Set the hint of the editText to noun/verb/whatever
+                user_input.setHint(holder);
+
+                // Set reminder to what to fill in
+                text_reminder.setText("Please fill in a " + holder);
+
+                //  The amount of words left counter
+                textView.setText((String.valueOf(placeholder_counter) + " words left"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("story", story);
+        outState.putInt("counter", placeholder_counter);
+    }
+
 
     //  When "USE" button is clicked
     public void use_clicked(View view) {
@@ -118,7 +121,7 @@ public class FirstActivity extends AppCompatActivity {
 
             if (story.isFilledIn()) {
 
-                String text_done = story.toString();
+                text_done = story.toString();
 
                 Intent intent = new Intent(this, SecondActivity.class);
 
