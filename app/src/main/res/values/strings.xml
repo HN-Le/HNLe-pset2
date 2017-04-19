@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MadLibs</string>
     <string name="intro_text">Welcome to Mad Libs! Please fill in some text! </string>
+    <string name="description">Fill in the words to complete the story!</string>
+    <string name="error_check">ERROR</string>
+    <string name="input_reminder">Please fill in</string>
+    <string name="button_use">USE</string>
+    <string name="title_story">Your MadLib Story</string>
+    <string name="another_story">Make Another Story!</string>
 </resources>

@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    // When clicked on "START" go to next screen
     public void goToFirst(View view) {
         Intent intent = new Intent(this, FirstActivity.class);
         startActivity(intent);
